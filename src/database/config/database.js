@@ -1,7 +1,8 @@
-import 'dotenv/config'
-import { Options } from 'sequelize'
+const dotenv = require('dotenv');
 
-const config: Options = {
+dotenv.config();
+
+module.exports = {
   username: process.env.PG_USER || 'postgres',
   password: process.env.PG_PASSWORD || 'docker',
   database: process.env.PG_DATABASE || 'apivendas',
@@ -12,6 +13,4 @@ const config: Options = {
     timezone: 'Z',
   },
   logging: false,
-}
-
-module.exports = config;
+};

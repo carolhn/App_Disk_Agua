@@ -6,7 +6,6 @@ class Products extends Model {
   declare name: string;
   declare price: number;
   declare description: string;
-  declare image: string;
 }
 
 Products.init({
@@ -21,14 +20,10 @@ Products.init({
     allowNull: false,
   },
   price: {
-    type: DataTypes.FLOAT,
+    type: DataTypes.DECIMAL(5, 2),
     allowNull: false,
   },
   description: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  image: {
     type: DataTypes.STRING,
     allowNull: false,
   },
