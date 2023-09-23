@@ -7,7 +7,10 @@
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/api/server.ts",
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
-    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "prestart": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
+    "seed": "npx sequelize-cli db:seed:all",
+    "drop": "npx sequelize-cli db:drop"
   },
   "repository": {
     "type": "git",
@@ -30,6 +33,7 @@
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.2.0",
     "prettier": "^3.0.3",
+    "sequelize-cli": "6.2.0",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.2.2"
@@ -40,6 +44,7 @@
     "express-async-errors": "^3.1.1",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "0.2.29"
+    "sequelize": "6.3.4",
+    "typeorm": "^0.2.29"
   }
 }
