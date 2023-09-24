@@ -14,7 +14,7 @@ module.exports = {
       allowNull: false,
     },
     phone: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
       allowNull: false,
     },
     type: {
@@ -22,7 +22,7 @@ module.exports = {
       allowNull: false,
     },
     cpf_cnpj: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
       allowNull: false,
     },
     address: {

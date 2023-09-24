@@ -1,10 +1,6 @@
-DROP SCHEMA IF EXISTS Diskapp;
-
-CREATE SCHEMA Diskapp;
+CREATE DATABASE Diskapp;
 
 USE Diskapp;
-
--- Tabela de Usuários
 
 CREATE TABLE
     users (
@@ -15,76 +11,6 @@ CREATE TABLE
         role ENUM('administrator', 'employee') NOT NULL,
         PRIMARY KEY (id)
     );
-
--- Tabela de Clientes
-
-CREATE TABLE
-    customers (
-        id INT NOT NULL AUTO_INCREMENT,
-        name VARCHAR(100) NOT NULL,
-        phone VARCHAR(20) NOT NULL,
-        type ENUM('CPF', 'CNPJ') NOT NULL,
-        cpf_cnpj VARCHAR(20) NOT NULL,
-        address VARCHAR(100) NOT NULL,
-        PRIMARY KEY (id),
-        UNIQUE KEY (cpf_cnpj)
-    );
-
--- Tabela de Produtos
-
-CREATE TABLE
-    products (
-        id INT NOT NULL AUTO_INCREMENT,
-        product_name VARCHAR(100) NOT NULL,
-        description VARCHAR(255) NOT NULL,
-        PRIMARY KEY (id),
-        UNIQUE KEY (product_name)
-    );
-
--- Tabela de Compras
-
-CREATE TABLE
-    purchase (
-        id INT NOT NULL AUTO_INCREMENT,
-        invoice_number VARCHAR(20) NOT NULL,
-        purchase_date DATE NOT NULL,
-        product_id INT NOT NULL,
-        quantity INT NOT NULL,
-        unit_price DECIMAL(9, 2) NOT NULL,
-        total_price DECIMAL(9, 2) NOT NULL,
-        PRIMARY KEY (id),
-        FOREIGN KEY (product_id) REFERENCES products(id)
-    );
-
--- Tabela de Itens de Venda
-
-CREATE TABLE
-    sale (
-        id INT NOT NULL AUTO_INCREMENT,
-        customer_id INT NOT NULL,
-        product_id INT NOT NULL,
-        quantity INT NOT NULL,
-        unit_price DECIMAL(9, 2) NOT NULL,
-        total_price DECIMAL(9, 2) NOT NULL,
-        PRIMARY KEY (id),
-        FOREIGN KEY (customer_id) REFERENCES customers(id),
-        FOREIGN KEY (product_id) REFERENCES products(id)
-    );
-
--- Tabela de Preços Personalizados para Clientes e Produtos
-
-CREATE TABLE
-    customer_prices (
-        id INT NOT NULL AUTO_INCREMENT,
-        customer_id INT NOT NULL,
-        product_id INT NOT NULL,
-        price DECIMAL(9, 2) NOT NULL,
-        PRIMARY KEY (id),
-        FOREIGN KEY (customer_id) REFERENCES customers(id),
-        FOREIGN KEY (product_id) REFERENCES products(id)
-    );
-
--- Inserção de dados fictícios
 
 INSERT INTO
     users (name, email, password, role)
@@ -105,17 +31,16 @@ VALUES (
         'employee'
     );
 
-INSERT INTO
-    products (product_name, description)
-VALUES (
-        'Produto A',
-        'Descrição do Produto A'
-    ), (
-        'Produto B',
-        'Descrição do Produto B'
-    ), (
-        'Produto C',
-        'Descrição do Produto C'
+CREATE TABLE
+    customers (
+        id INT NOT NULL AUTO_INCREMENT,
+        name VARCHAR(100) NOT NULL,
+        phone VARCHAR(20) NOT NULL,
+        type ENUM('CPF', 'CNPJ') NOT NULL,
+        cpf_cnpj VARCHAR(20) NOT NULL,
+        address VARCHAR(100) NOT NULL,
+        PRIMARY KEY (id),
+        UNIQUE KEY (cpf_cnpj)
     );
 
 INSERT INTO
@@ -140,9 +65,78 @@ VALUES (
         'Av. Cliente B, 456'
     );
 
+CREATE TABLE
+    products (
+        id INT NOT NULL AUTO_INCREMENT,
+        product_name VARCHAR(100) NOT NULL,
+        description VARCHAR(255) NOT NULL,
+        PRIMARY KEY (id),
+        UNIQUE KEY (product_name)
+    );
+
+INSERT INTO
+    products (product_name, description)
+VALUES (
+        'Produto A',
+        'Descrição do Produto A'
+    ), (
+        'Produto B',
+        'Descrição do Produto B'
+    ), (
+        'Produto C',
+        'Descrição do Produto C'
+    );
+
+CREATE TABLE
+    sales (
+        id INT NOT NULL AUTO_INCREMENT,
+        customer_id INT NOT NULL,
+        product_id INT NOT NULL,
+        quantity INT NOT NULL,
+        unit_price DECIMAL(9, 2) NOT NULL,
+        total_price DECIMAL(9, 2) NOT NULL,
+        PRIMARY KEY (id),
+        FOREIGN KEY (customer_id) REFERENCES customers(id),
+        FOREIGN KEY (product_id) REFERENCES products(id)
+    );
+
+INSERT INTO
+    sales (
+        customer_id,
+        product_id,
+        quantity,
+        unit_price,
+        total_price
+    )
+VALUES (1, 1, 10, 9.99, 99.90), (2, 2, 20, 10.99, 219.80);
+
+CREATE TABLE
+    customer_prices (
+        id INT NOT NULL AUTO_INCREMENT,
+        customer_id INT NOT NULL,
+        product_id INT NOT NULL,
+        price DECIMAL(9, 2) NOT NULL,
+        PRIMARY KEY (id),
+        FOREIGN KEY (customer_id) REFERENCES customers(id),
+        FOREIGN KEY (product_id) REFERENCES products(id)
+    );
+
 INSERT INTO
     customer_prices (customer_id, product_id, price)
 VALUES (1, 1, 9.99), (2, 1, 10.99), (1, 2, 14.99), (2, 2, 13.99);
+
+CREATE TABLE
+    purchase (
+        id INT NOT NULL AUTO_INCREMENT,
+        invoice_number VARCHAR(20) NOT NULL,
+        purchase_date DATE NOT NULL,
+        product_id INT NOT NULL,
+        quantity INT NOT NULL,
+        unit_price DECIMAL(9, 2) NOT NULL,
+        total_price DECIMAL(9, 2) NOT NULL,
+        PRIMARY KEY (id),
+        FOREIGN KEY (product_id) REFERENCES products(id)
+    );
 
 INSERT INTO
     purchase (
@@ -175,13 +169,3 @@ VALUES (
         9.99,
         749.25
     );
-
-INSERT INTO
-    sale (
-        customer_id,
-        product_id,
-        quantity,
-        unit_price,
-        total_price
-    )
-VALUES (1, 1, 10, 9.99, 99.90), (2, 2, 20, 10.99, 219.80);

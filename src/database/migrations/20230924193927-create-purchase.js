@@ -10,7 +10,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       invoice_number: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       invoice_date: {
