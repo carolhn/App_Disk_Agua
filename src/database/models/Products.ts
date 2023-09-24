@@ -3,7 +3,7 @@ import db from './index';
 
 class Products extends Model {
   declare id: number;
-  declare name: string;
+  declare product_name: string;
   declare price: number;
   declare description: string;
 }
