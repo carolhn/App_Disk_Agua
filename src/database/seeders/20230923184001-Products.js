@@ -4,14 +4,32 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('products', [
       {
-        name: 'Caixa de Copo 200ml',
-        price: 1.00,
-        description: 'Com 48 unidades',
+        product_name: 'CAIXA DE COPO 200ML',
+        description: '48 UNIDADES',
       },
       {
-        name: 'Água 510ml com gás',
-        price: 1.00,
-        description: 'Com 12 unidades',
+        product_name: 'AGUA 510 ML SEM GÁS',
+        description: '12 UNIDADES',
+      },
+      {
+        product_name: 'AGUA 510 ML COM GÁS',
+        description: '12 UNIDADES',
+      },
+      {
+        product_name: 'AGUA 1500 ML SEM GÁS',
+        description: '12 UNIDADES',
+      },
+      {
+        product_name: 'AGUA 1500 ML COM GÁS',
+        description: '12 UNIDADES',
+      },
+      {
+        product_name: 'AGUA 5 LITROS',
+        description: '4 UNIDADES',
+      },
+      {
+        product_name: 'AGUA 20 LITROS',
+        description: '1 UNIDADE',
       },
     ], {});
   },

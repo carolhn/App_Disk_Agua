@@ -15,12 +15,8 @@ Products.init({
     autoIncrement: true,
     allowNull: false,
   },
-  name: {
+  product_name: {
     type: DataTypes.STRING,
-    allowNull: false,
-  },
-  price: {
-    type: DataTypes.DECIMAL(5, 2),
     allowNull: false,
   },
   description: {
