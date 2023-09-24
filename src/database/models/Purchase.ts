@@ -4,9 +4,9 @@ import Products from './Products';
 
 class Purchase extends Model {
   declare id: number;
-  declare invoice_number: Number;
+  declare invoice_number: String;
   declare purchase_date: Date;
-  declare product_id: Number;
+  declare productId: Number;
   declare quantity: Number;
   declare unit_price: Number;
   declare total_price: Number;
@@ -20,7 +20,7 @@ Purchase.init({
     allowNull: false,
   },
   invoice_number: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   purchase_date: {
@@ -50,6 +50,6 @@ Purchase.init({
     timestamps: false,
   });
 
-  Purchase.belongsTo(Products, { foreignKey: 'productId' as 'product' });
+  Purchase.belongsTo(Products, { foreignKey: 'productId' });
 
 export default Purchase;

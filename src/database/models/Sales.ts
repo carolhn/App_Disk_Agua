@@ -45,6 +45,6 @@ Sales.init({
   timestamps: false,
 });
 
-Sales.belongsTo(Products, { foreignKey: 'productId' as 'product' });
+Sales.belongsTo(Products, { foreignKey: 'productId' });
 
 export default Sales;

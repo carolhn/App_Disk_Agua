@@ -22,7 +22,7 @@ Customers.init({
     allowNull: false,
   },
   phone: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   type: {
@@ -30,7 +30,7 @@ Customers.init({
     allowNull: false,
   },
   cpf_cnpj: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.STRING,
     allowNull: false,
   },
   address: {
