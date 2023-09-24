@@ -18,10 +18,10 @@ CREATE TABLE
         name VARCHAR(100) NOT NULL,
         phone VARCHAR(20) NOT NULL,
         type VARCHAR(20) NOT NULL,
-        `CPF / CNPJ` VARCHAR(20) NOT NULL,
+`CPF / CNPJ`VARCHAR(20) NOT NULL,
         address VARCHAR(100) NOT NULL,
         PRIMARY KEY (id),
-        UNIQUE KEY `CPF / CNPJ` (`CPF / CNPJ`)
+        UNIQUE KEY`CPF / CNPJ` (`CPF / CNPJ`)
     );
 
 CREATE TABLE
@@ -30,7 +30,7 @@ CREATE TABLE
         product_name VARCHAR(100) NOT NULL,
         description VARCHAR(100) NOT NULL,
         PRIMARY KEY(id),
-        UNIQUE KEY `name` (name)
+        UNIQUE KEY`name` (name)
     );
 
 CREATE TABLE
