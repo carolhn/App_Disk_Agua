@@ -9,11 +9,11 @@ USE Diskapp;
 CREATE TABLE
     users (
         id INT NOT NULL AUTO_INCREMENT,
+        name VARCHAR(100) NOT NULL,
         email VARCHAR(100) NOT NULL,
         password VARCHAR(64) NOT NULL,
-        role ENUM('admin', 'usuario') NOT NULL,
-        PRIMARY KEY (id),
-        UNIQUE KEY (email)
+        role ENUM('administrator', 'employee') NOT NULL,
+        PRIMARY KEY (id)
     );
 
 -- Tabela de Clientes
@@ -44,12 +44,14 @@ CREATE TABLE
 -- Tabela de Compras
 
 CREATE TABLE
-    purchases (
+    purchase (
         id INT NOT NULL AUTO_INCREMENT,
+        invoice_number VARCHAR(20) NOT NULL,
         purchase_date DATE NOT NULL,
         product_id INT NOT NULL,
         quantity INT NOT NULL,
-        price DECIMAL(9, 2) NOT NULL,
+        unit_price DECIMAL(9, 2) NOT NULL,
+        total_price DECIMAL(9, 2) NOT NULL,
         PRIMARY KEY (id),
         FOREIGN KEY (product_id) REFERENCES products(id)
     );
@@ -57,28 +59,16 @@ CREATE TABLE
 -- Tabela de Itens de Venda
 
 CREATE TABLE
-    sale_items (
+    sale (
         id INT NOT NULL AUTO_INCREMENT,
         customer_id INT NOT NULL,
         product_id INT NOT NULL,
         quantity INT NOT NULL,
-        price DECIMAL(9, 2) NOT NULL,
-        sale_date DATE NOT NULL,
+        unit_price DECIMAL(9, 2) NOT NULL,
+        total_price DECIMAL(9, 2) NOT NULL,
         PRIMARY KEY (id),
         FOREIGN KEY (customer_id) REFERENCES customers(id),
         FOREIGN KEY (product_id) REFERENCES products(id)
-    );
-
--- Tabela de Notas Fiscais
-
-CREATE TABLE
-    notes (
-        id INT NOT NULL AUTO_INCREMENT,
-        customer_id INT NOT NULL,
-        reason VARCHAR(255),
-        note_date DATE NOT NULL,
-        PRIMARY KEY (id),
-        FOREIGN KEY (customer_id) REFERENCES customers(id)
     );
 
 -- Tabela de Preços Personalizados para Clientes e Produtos
@@ -97,19 +87,22 @@ CREATE TABLE
 -- Inserção de dados fictícios
 
 INSERT INTO
-    users (email, password, role)
+    users (name, email, password, role)
 VALUES (
+        'Usuário 1',
         'usuario1@email.com',
         'senha123',
-        'usuario'
+        'administrator'
     ), (
+        'Usuário 2',
         'usuario2@email.com',
         'outrasenha456',
-        'usuario'
+        'employee'
     ), (
+        'Admin',
         'admin@email.com',
         'senhaAdmin789',
-        'admin'
+        'employee'
     );
 
 INSERT INTO
@@ -152,32 +145,43 @@ INSERT INTO
 VALUES (1, 1, 9.99), (2, 1, 10.99), (1, 2, 14.99), (2, 2, 13.99);
 
 INSERT INTO
-    purchases (
+    purchase (
+        invoice_number,
         purchase_date,
         product_id,
         quantity,
-        price
+        unit_price,
+        total_price
     )
-VALUES ('2023-09-15', 1, 100, 999.99), ('2023-09-16', 2, 50, 499.99), ('2023-09-17', 1, 75, 749.99);
+VALUES (
+        'NotaFiscal001',
+        '2023-09-15',
+        1,
+        100,
+        9.99,
+        999.99
+    ), (
+        'NotaFiscal002',
+        '2023-09-16',
+        2,
+        50,
+        10.99,
+        549.50
+    ), (
+        'NotaFiscal003',
+        '2023-09-17',
+        1,
+        75,
+        9.99,
+        749.25
+    );
 
 INSERT INTO
-    sale_items (
+    sale (
         customer_id,
         product_id,
         quantity,
-        price,
-        sale_date
+        unit_price,
+        total_price
     )
-VALUES (1, 1, 10, 109.99, '2023-09-18'), (2, 2, 20, 299.99, '2023-09-19');
-
-INSERT INTO
-    notes (customer_id, reason, note_date)
-VALUES (
-        1,
-        'Nota fiscal de venda para Cliente A',
-        '2023-09-18'
-    ), (
-        2,
-        'Nota fiscal de venda para Cliente B',
-        '2023-09-19'
-    );
+VALUES (1, 1, 10, 9.99, 99.90), (2, 2, 20, 10.99, 219.80);
