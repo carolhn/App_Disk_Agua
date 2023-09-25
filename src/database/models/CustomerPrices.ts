@@ -1,7 +1,7 @@
-import { Model, DataTypes } from "sequelize";
-import db from "./index";
-import Customers from "./Customers";
-import Products from "./Products";
+import { Model, DataTypes } from 'sequelize';
+import db from './index';
+import Customers from './Customers';
+import Products from './Products';
 
 class CustomerPrice extends Model {
     declare id: number;
