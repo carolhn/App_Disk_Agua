@@ -1,4 +1,6 @@
-CREATE DATABASE Diskapp;
+DROP SCHEMA IF EXISTS Diskapp;
+
+CREATE SCHEMA IF NOT EXISTS Diskapp;
 
 USE Diskapp;
 
