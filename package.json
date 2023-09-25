@@ -1,6 +1,7 @@
 {
   "name": "app_disk_agua",
   "version": "1.0.0",
+  "type": "commonjs",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -36,7 +37,7 @@
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.2.0",
     "prettier": "^3.0.3",
-    "sequelize-cli": "6.2.0",
+    "sequelize-cli": "^6.2.0",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.2.2"
