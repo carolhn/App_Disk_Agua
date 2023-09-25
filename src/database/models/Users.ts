@@ -1,13 +1,12 @@
 import { DataTypes, Model } from "sequelize";
-import { UserAttributes, IUsers } from "@database/types/Users";
 import db from './index';
 
-class Users extends Model<IUsers, UserAttributes> {
-  public id!: number;
-  public name!: string;
-  public email!: string;
-  public password!: string;
-  public role!: string;
+class Users extends Model {
+  declare id: number;
+  declare name: string;
+  declare email: string;
+  declare password: string;
+  declare role: string;
 }
 
 Users.init({
@@ -18,26 +17,26 @@ Users.init({
     allowNull: false,
   },
   name: {
-    type: DataTypes.STRING(255),
+    type: DataTypes.STRING,
     allowNull: false,
   },
   email: {
-    type: DataTypes.STRING(255),
+    type: DataTypes.STRING,
     allowNull: false,
     unique: true,
   },
   password: {
-    type: DataTypes.STRING(255),
+    type: DataTypes.STRING,
     allowNull: false,
   },
   role: {
-    type: DataTypes.STRING(255),
+    type: DataTypes.STRING,
     allowNull: false,
   },
 }, {
   underscored: true,
   sequelize: db,
-  tableName: "users",
+  tableName: 'users',
   timestamps: false,
 });
 
