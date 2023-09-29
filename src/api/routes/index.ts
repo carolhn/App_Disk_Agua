@@ -1,9 +1,8 @@
 import { Router } from 'express';
+import adminRoutes from './Admin.routes';
 
-const routes = Router();
+const router = Router();
 
-routes.get('/', (request, response) => {
-  return response.json({ message: 'Hello World' });
-});
+router.use('/admin', adminRoutes);
 
-export default routes;
+export default router;
