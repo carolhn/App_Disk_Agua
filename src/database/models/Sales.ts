@@ -1,6 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 import db from './index';
 import Products from './Products';
+import Customers from './Customers';
 
 class Sales extends Model {
   declare id: Number;
@@ -18,11 +19,11 @@ Sales.init({
     autoIncrement: true,
     allowNull: false,
   },
-  customer_id: {
+  customerId: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  product_id: {
+  productId: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
@@ -45,6 +46,7 @@ Sales.init({
   timestamps: false,
 });
 
-Sales.belongsTo(Products, { foreignKey: 'productId' });
+Sales.belongsTo(Products, { foreignKey: 'product_id' as 'product'});
+Sales.belongsTo(Customers, { foreignKey: 'customer_id' as 'customer' })
 
 export default Sales;
