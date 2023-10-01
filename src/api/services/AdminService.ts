@@ -10,7 +10,7 @@ const getUserByEmail = async (email: string): Promise<IAdmin | null> => {
   return user ? user.get() : null;
 };
 
-const registerNewUser = async (newUser: NewAdmin): Promise<{ type: number | null; message: string }> => {
+const registerNewUser = async (newUser: NewAdmin): Promise<{ type: number; message: string }> => {
   try {
     const existingUser = await getUserByEmail(newUser.email);
 
@@ -28,12 +28,12 @@ const registerNewUser = async (newUser: NewAdmin): Promise<{ type: number | null
     });
 
     if (createNewUser) {
-      return { type: null, message: 'Usuário criado' };
+      return { type: 201, message: 'Usuário criado' };
     } else {
       throw new Error('Erro ao criar usuário');
     }
   } catch (error) {
-    throw new Error('Erro interno do servidor');
+    return { type: 500, message: 'Erro interno do servidor' };
   }
 };
 
