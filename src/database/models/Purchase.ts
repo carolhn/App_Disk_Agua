@@ -50,6 +50,6 @@ Purchase.init({
     timestamps: false,
   });
 
-  Purchase.belongsTo(Products, { foreignKey: 'productId' });
+  Purchase.belongsTo(Products, { foreignKey: 'product_id' as 'product' });
 
 export default Purchase;

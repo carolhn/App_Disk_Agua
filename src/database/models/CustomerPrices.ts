@@ -36,7 +36,7 @@ CustomerPrice.init({
     timestamps: false,
   });
 
-  CustomerPrice.belongsTo(Customers, { foreignKey: 'customerId' as 'customer' });
-  CustomerPrice.belongsTo(Products, { foreignKey: 'productId' as 'product' });
+  CustomerPrice.belongsTo(Customers, { foreignKey: 'customer_id' as 'customer' });
+  CustomerPrice.belongsTo(Products, { foreignKey: 'product_id' as 'product' });
 
 export default CustomerPrice;
