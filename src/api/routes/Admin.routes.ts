@@ -1,9 +1,18 @@
 import { Router } from 'express';
-import * as AdminController from '../controllers/AdminController';
+import AdminController from '../controllers/AdminController';
 import { validateUserData } from '../middlewares/validateNewUser';
 
-const adminRoutes = Router();
+class AdminRoutes {
+  public router: Router = Router();
+  private adminController: AdminController = new AdminController();
 
-adminRoutes.post('/register', validateUserData, AdminController.registerNewUser);
+  constructor() {
+    this.initializeRoutes();
+  }
 
-export default adminRoutes;
+  private initializeRoutes(): void {
+    this.router.post('/register', validateUserData, this.adminController.registerNewUser);
+  }
+}
+
+export default new AdminRoutes().router;
