@@ -41,6 +41,6 @@ export default class AdminService implements IAdminService {
 
   async getUserAll(): Promise<IAdmin[]> {
     const users = await Users.findAll();
-    return users.map((user) => user.get());
+    return users;
   };
 }
