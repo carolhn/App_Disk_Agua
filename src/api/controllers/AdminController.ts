@@ -15,8 +15,6 @@ async registerNewUser(req: Request, res: Response) {
    if (registerUser.type) {
         return res.status(registerUser.type).json({ message: registerUser.message });
       }
-
-      return res.status(201).json({ message: registerUser.message });
     } catch (error) {
       console.error('Erro no registro de usuário:', error);
       return res.status(500).json({ message: 'Erro interno do servidor' });
