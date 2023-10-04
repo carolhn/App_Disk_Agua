@@ -36,10 +36,11 @@ Users.init(
     },
   },
   {
+    underscored: true,
     sequelize: db,
     tableName: 'users',
     timestamps: false,
-    modelName: 'Users',
+    modelName: 'users',
   }
 );
 
