@@ -12,7 +12,6 @@ export default class AdminService implements IAdminService {
     return user ? user.get() : null;
   };
 
-
   async registerNewUser(newUser: NewAdmin): Promise<{ type: number; message: string }> {
     try {
       const existingUser = await this.getUserByEmail(newUser.email);
@@ -39,4 +38,9 @@ export default class AdminService implements IAdminService {
       return { type: 500, message: 'Erro interno do servidor' };
     }
   }
+
+  async getUserAll(): Promise<IAdmin[]> {
+    const users = await Users.findAll();
+    return users.map((user) => user.get());
+  };
 }
