@@ -13,6 +13,7 @@ class AdminRoutes {
   private initializeRoutes(): void {
     this.router.post('/register', validateUserData, this.adminController.registerNewUser);
     this.router.get('/users', this.adminController.getUserAll);
+    this.router.delete('/:id', this.adminController.deleteUser);
   }
 }
 

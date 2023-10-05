@@ -12,3 +12,4 @@ nyc.config.js
 
 uploads/*
 !uploads/.gitkeep
+.nyc_output/processinfo/index.json
