@@ -30,4 +30,17 @@ async registerNewUser(req: Request, res: Response) {
       return res.status(500).json({ message: 'Erro interno do servidor' });
     }
   }
+
+  async deleteUser(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      
+      const adminService = new AdminService();
+      await adminService.deleteUser(Number(id));
+      return res.status(200).json({ message: 'Usuário deletado com sucesso' });
+    } catch (error) {
+      console.error('Erro ao deletar usuário:', error);
+      return res.status(500).json({ message: 'Erro interno do servidor' });
+    }
+  }
 }
