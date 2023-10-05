@@ -43,4 +43,23 @@ export default class AdminService implements IAdminService {
     const users = await Users.findAll();
     return users;
   };
+
+async deleteUser(ids: number): Promise<{ type: number; message: string }> {
+  try {
+    const user = await this.getUserByEmail(String(ids));
+    if (!user) {
+      return { type: 404, message: 'Usuário não encontrado' };
+    }
+
+    const deleteUser = await Users.destroy({ where: { id: ids } });
+
+      if (!deleteUser) {
+        throw new Error('Erro ao deletar usuário');
+      } else {
+        return { type: 200, message: 'Usuário deletado' };
+      }
+    } catch (error) {
+      return { type: 500, message: 'Erro interno do servidor' };
+    }
+  }
 }
