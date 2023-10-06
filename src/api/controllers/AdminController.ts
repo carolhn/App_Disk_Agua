@@ -21,10 +21,11 @@ async registerNewUser(req: Request, res: Response) {
     }
   }
 
-  async getUserAll(req: Request, res: Response) {
+  async findAll(req: Request, res: Response) {
     try {
-      const users = await new AdminService().getUserAll();
-      return res.status(200).json({ users });
+      const users = new AdminService();
+      const userAll = await users.findAll();
+      return res.status(200).json({ userAll });
     } catch (error) {
       console.error('Erro ao buscar usuários:', error);
       return res.status(500).json({ message: 'Erro interno do servidor' });

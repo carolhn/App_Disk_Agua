@@ -4,17 +4,17 @@ import { createHash } from '../../utils/authentication/crypto';
 
 export default class AdminService implements IAdminService {
 
-  async getUserByEmail(email: string): Promise<IAdmin | null> {
+  async findByEmail(email: string): Promise<Users | null> {
     const user = await Users.findOne({
       where: { email },
       attributes: { exclude: ['password'] },
     });
-    return user ? user.get() : null;
+    return user;
   };
 
   async registerNewUser(newUser: NewAdmin): Promise<{ type: number; message: string }> {
     try {
-      const existingUser = await this.getUserByEmail(newUser.email);
+      const existingUser = await this.findByEmail(newUser.email);
 
       if (existingUser) {
         return { type: 409, message: 'Usuário já existe no banco de dados' };
@@ -39,7 +39,7 @@ export default class AdminService implements IAdminService {
     }
   }
 
-  async getUserAll(): Promise<IAdmin[]> {
+  async findAll(): Promise<IAdmin[]> {
     const users = await Users.findAll();
     return users;
   };

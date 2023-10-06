@@ -1,3 +1,5 @@
+import Users from "@database/models/Users";
+
 export interface IAdmin {
   id?: number;
   name: string;
@@ -14,7 +16,7 @@ export interface NewAdmin {
 }
 
 export interface IAdminService {
-  getUserByEmail(email: string): Promise<IAdmin | null>;
+  findByEmail(email: string): Promise<Users | null>;
   registerNewUser(newUser: NewAdmin): Promise<{ type: number; message: string }>;
-  getUserAll(): Promise<IAdmin[]>;
+  findAll(): Promise<IAdmin[]>;
 }
