@@ -30,7 +30,7 @@ export default class UserService implements IUserService {
       });
 
       if (createNewUser) {
-        return { type: 201, message: 'Usuário criado' };
+        return { type: 201, message: 'Usuário criado com sucesso' };
       } else {
         throw new Error('Erro ao criar usuário');
       }

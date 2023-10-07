@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import UserController from '../controllers/UserController';
-import { validateUserData } from '../middlewares/validateNewUser';
+import { validateUserData } from '../middlewares/ValidateUser';
 
 class UserRoutes {
   public router: Router = Router();
