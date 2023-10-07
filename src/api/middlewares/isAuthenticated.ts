@@ -19,7 +19,7 @@ export default function isAuthenticated(
 
   try {
     verify(token, TOKEN_SECRET);
-    next();
+    return next();
   } catch (error) {
     throw new AppError('Token inválido!', 401);
   }

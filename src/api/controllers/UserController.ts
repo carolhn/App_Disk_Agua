@@ -8,6 +8,7 @@ async createUser(req: Request, res: Response) {
     const { name, email, password, role } = req.body;
 
     const user = new UserService();
+
     const registerUser = await user.createUser({ name, email, password, role });
 
    if (registerUser.type) {

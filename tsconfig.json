@@ -32,7 +32,13 @@
     "paths": {
       "@api/*": ["src/api/*"],
       "@database/*": ["src/database/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@models/*": ["src/database/models/*"],
+      "@controllers/*": ["src/api/controllers/*"],
+      "@middlewares/*": ["src/api/middlewares/*"],
+      "@services/*": ["src/api/services/*"],
+      "@routes/*": ["src/api/routes/*"],
+      "@errors/*": ["src/utils/errors*"]
     },                                                   /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
