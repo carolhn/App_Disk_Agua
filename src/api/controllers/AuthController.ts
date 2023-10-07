@@ -9,7 +9,7 @@ export default class AuthenticationController {
       
       const authService = new AuthenticationService();
       const authenticatedUser = await authService.authUser({ email, password });
-      
+    
       return res.json(authenticatedUser);
     } catch (error) {
       return res.status(401).json({ error: 'Falha na autenticação' });
