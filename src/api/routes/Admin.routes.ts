@@ -1,20 +1,20 @@
 import { Router } from 'express';
-import AdminController from '../controllers/AdminController';
+import UserController from '../controllers/UserController';
 import { validateUserData } from '../middlewares/validateNewUser';
 
-class AdminRoutes {
+class UserRoutes {
   public router: Router = Router();
-  private adminController: AdminController = new AdminController();
+  private userController: UserController = new UserController();
 
   constructor() {
     this.initializeRoutes();
   }
 
   private initializeRoutes(): void {
-    this.router.post('/register', validateUserData, this.adminController.registerNewUser);
-    this.router.get('/users', this.adminController.findAll);
-    this.router.delete('/users/:id', this.adminController.deleteUser);
+    this.router.post('/register', validateUserData, this.userController.createUser);
+    this.router.get('/users', this.userController.findAll);
+    this.router.delete('/users/:id', this.userController.deleteUser);
   }
 }
 
-export default new AdminRoutes().router;
+export default new UserRoutes().router;

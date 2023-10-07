@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { NewAdmin } from "@api/interfaces/IAdmin"
+import { NewUser } from "../interfaces/IUsers"
 
 const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const regexPassword = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
@@ -11,7 +11,7 @@ const validateNewUser = (value: string, field: string) => {
 };
 
 const validateUserData = (req: Request, res: Response, next: NextFunction) => {
-    const { name, email, password }: NewAdmin = req.body;
+    const { name, email, password }: NewUser = req.body;
 
     try {
         validateNewUser(name, 'name');

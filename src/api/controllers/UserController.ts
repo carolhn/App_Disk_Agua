@@ -1,16 +1,14 @@
 import { Request, Response } from 'express';
-import AdminService from '../services/AdminService';
-import { NewAdmin } from '../interfaces/IAdmin';
+import UserService from '../services/UserService';
 
-export default class AdminController {
+export default class UserController {
   
-async registerNewUser(req: Request, res: Response) {
+async createUser(req: Request, res: Response) {
   try {
     const { name, email, password, role } = req.body;
 
-    const newUser: NewAdmin = { name, email, password, role };
-    const adminService = new AdminService();
-    const registerUser = await adminService.registerNewUser(newUser);
+    const user = new UserService();
+    const registerUser = await user.createUser({ name, email, password, role });
 
    if (registerUser.type) {
         return res.status(registerUser.type).json({ message: registerUser.message });
@@ -23,7 +21,7 @@ async registerNewUser(req: Request, res: Response) {
 
   async findAll(req: Request, res: Response) {
     try {
-      const users = new AdminService();
+      const users = new UserService();
       const userAll = await users.findAll();
       return res.status(200).json({ userAll });
     } catch (error) {
@@ -36,7 +34,7 @@ async registerNewUser(req: Request, res: Response) {
     try {
       const { id } = req.params;
       
-      const adminService = new AdminService();
+      const adminService = new UserService();
       await adminService.deleteUser(Number(id));
       return res.status(200).json({ message: 'Usuário deletado com sucesso' });
     } catch (error) {

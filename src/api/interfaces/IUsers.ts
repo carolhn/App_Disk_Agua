@@ -1,6 +1,6 @@
 import Users from "@database/models/Users";
 
-export interface IAdmin {
+export interface IUser {
   id?: number;
   name: string;
   email: string;
@@ -8,15 +8,15 @@ export interface IAdmin {
   role: 'administrator' | 'employee';
 }
 
-export interface NewAdmin {
+export interface NewUser {
   name: string;
   email: string;
   password: string;
   role: 'administrator' | 'employee';
 }
 
-export interface IAdminService {
+export interface IUserService {
   findByEmail(email: string): Promise<Users | null>;
-  registerNewUser(newUser: NewAdmin): Promise<{ type: number; message: string }>;
-  findAll(): Promise<IAdmin[]>;
+  createUser(newUser: NewUser): Promise<{ type: number; message: string }>;
+  findAll(): Promise<IUser[]>;
 }
