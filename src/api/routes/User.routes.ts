@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import UserController from '../controllers/UserController';
 import { validateUserData } from '../middlewares/ValidateUser';
+import isAuthenticated from '@api/middlewares/isAuthenticated';
 
 class UserRoutes {
   public router: Router = Router();
@@ -12,7 +13,7 @@ class UserRoutes {
 
   private initializeRoutes(): void {
     this.router.post('/register', validateUserData, this.userController.createUser);
-    this.router.get('/users', this.userController.findAll);
+    this.router.get('/users', isAuthenticated ,this.userController.findAll);
     this.router.delete('/users/:id', this.userController.deleteUser);
   }
 }
