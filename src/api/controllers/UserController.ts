@@ -23,7 +23,7 @@ async createUser(req: Request, res: Response) {
     try {
       const users = new UserService();
       const userAll = await users.findAll();
-      return res.status(200).json({ userAll });
+      return res.status(200).json(userAll);
     } catch (error) {
       console.error('Erro ao buscar usuários:', error);
       return res.status(500).json({ message: 'Erro interno do servidor' });
