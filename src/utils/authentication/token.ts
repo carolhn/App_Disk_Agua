@@ -1,33 +1,21 @@
-import { SignOptions, sign, verify} from 'jsonwebtoken';
+import { SignOptions, sign } from 'jsonwebtoken';
 import { IToken } from '../../api/interfaces/IAuth';
+import AppError from '@utils/errors/AppError';
 
-const TOKEN_SECRET = 'd3aa349c8d932ea71f11aa096ba29f61'
+const TOKEN_SECRET = 'd3aa349c8d932ea71f11aa096ba29f61';
 
 const configToken: SignOptions = {
-    expiresIn: '1d',
-    algorithm: 'HS256'
-}
-
-const generateToken = (payload: IToken) => {
-    try {
-      const token = sign(payload, TOKEN_SECRET, configToken);
-      return token;
-    } catch (error) {
-      throw new Error('Token nao gerado!');
-    }
+  expiresIn: '1d',
+  algorithm: 'HS256',
 };
 
-const verifyToken = (token: string) => {
-    if(!token) {
-        throw new Error('Token nao existe!');
-    }
-    try {
-        const validateJwt = verify(token, TOKEN_SECRET);
-        console.log('aqui é o validate token-----------', validateJwt);
-        return validateJwt;
-    } catch (error) {
-      throw new Error('Token invalido!');
-    }
-}
+const generateToken = (payload: IToken): string => {
+  try {
+    const token = sign(payload, TOKEN_SECRET, configToken);
+    return token;
+  } catch (error) {
+    throw new AppError('Erro ao gerar o token', 500);
+  }
+};
 
-export { generateToken, verifyToken };
+export { generateToken };
