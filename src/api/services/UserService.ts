@@ -1,22 +1,22 @@
-import { IAdmin, IAdminService, NewAdmin } from '../interfaces/IAdmin';
-import Users from '../../database/models/Users';
+import { IUser, IUserService, NewUser } from '../interfaces/IUsers';
 import { createHash } from '../../utils/authentication/crypto';
+import Users from '../../database/models/Users';
 
-export default class AdminService implements IAdminService {
+export default class UserService implements IUserService {
 
-  async getUserByEmail(email: string): Promise<IAdmin | null> {
+  async findByEmail(email: string): Promise<Users | null> {
     const user = await Users.findOne({
       where: { email },
       attributes: { exclude: ['password'] },
     });
-    return user ? user.get() : null;
+    return user;
   };
 
-  async registerNewUser(newUser: NewAdmin): Promise<{ type: number; message: string }> {
+  async createUser(newUser: NewUser): Promise<{ type: number; message: string }> {
     try {
-      const existingUser = await this.getUserByEmail(newUser.email);
+      const isUser = await this.findByEmail(newUser.email);
 
-      if (existingUser) {
+      if (isUser) {
         return { type: 409, message: 'Usuário já existe no banco de dados' };
       }
 
@@ -39,7 +39,7 @@ export default class AdminService implements IAdminService {
     }
   }
 
-  async getUserAll(): Promise<IAdmin[]> {
+  async findAll(): Promise<IUser[]> {
     const users = await Users.findAll();
     return users;
   };
