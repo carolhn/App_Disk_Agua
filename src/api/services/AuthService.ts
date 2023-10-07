@@ -1,6 +1,8 @@
 import Users from '../../database/models/Users';
 import { hashToCompare } from '../../utils/authentication/crypto';
 import { IAuth } from '../interfaces/IAuth';
+import { generateToken } from '../../utils/authentication/token';
+import { IResponse } from '../interfaces/IAuth';
 
 export default class AuthenticationService {
 
@@ -13,7 +15,7 @@ export default class AuthenticationService {
     }
   }
 
- async authUser({ email, password }: IAuth): Promise<Users> {
+ async authUser({ email, password }: IAuth): Promise<IResponse> {
     try {
       const user = await this.findByEmail(email);
 
@@ -27,7 +29,9 @@ export default class AuthenticationService {
         throw new Error('Senha inválida');
       }
 
-      return user;
+      const token = generateToken({ id: user.id });
+
+      return { user, token };
     } catch (error) {
       throw new Error('Erro na autenticação');
     }
