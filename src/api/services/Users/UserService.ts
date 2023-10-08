@@ -1,6 +1,6 @@
-import { IUser, IUserService, NewUser } from '../interfaces/IUsers';
-import { createHash } from '../../utils/authentication/crypto';
-import Users from '../../database/models/Users';
+import { IUser, IUserService, NewUser } from '../../interfaces/Users/IUsers';
+import { createHash } from '../../../utils/authentication/crypto';
+import Users from '../../../database/models/Users';
 
 export default class UserService implements IUserService {
 

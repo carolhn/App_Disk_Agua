@@ -1,7 +1,7 @@
 import Sinon from "sinon";
-import { IAdmin } from "../../src/api/interfaces/IAdmin";
+import { IUser } from "../../src/api/interfaces/Users/IUsers";
 import { expect } from "chai";
-import AdminService from '../../src/api/services/AdminService';
+import UserService from '../../src/api/services/Users/UserService';
 import Users from "../../src/database/models/Users";
 import { userMock } from "../mock/users.mock";
 import sinon from "sinon";
@@ -16,7 +16,7 @@ describe('Teste de Serviço: Admin', function () {
         email: 'biscoito@disk.com',
       };
 
-      const outputMock: IAdmin = {
+      const outputMock: IUser = {
         id: 2,
         name: 'Biscoito Azul',
         email: 'biscoito@disk.com',
@@ -28,9 +28,9 @@ describe('Teste de Serviço: Admin', function () {
         get: () => outputMock,
       }
 
-      const adminService = new AdminService();
+      const userService = new UserService();
       Sinon.stub(Users, 'findOne').resolves(userGet as never);
-      const result = await adminService.getUserByEmail(inputMock as never);
+      const result = await userService.findByEmail(inputMock as never);
       expect(result).to.be.deep.equal(outputMock);
     });
 
@@ -42,9 +42,9 @@ describe('Teste de Serviço: Admin', function () {
         role: 'employee',
       };
 
-      const adminService = new AdminService()
+      const userService = new UserService()
       Sinon.stub(Users, 'create').resolves({ dataValues: inputMock } as any);
-      const result = await adminService.registerNewUser(inputMock as never);
+      const result = await userService.createUser(inputMock as never);
       expect(result.type).to.be.equal(201);
       expect(result.message).to.be.equal('Usuário criado');
     });
@@ -57,9 +57,9 @@ describe('Teste de Serviço: Admin', function () {
         role: 'employee',
       };
 
-      const adminService = new AdminService()
+      const userService = new UserService()
       Sinon.stub(Users, 'create').rejects(new Error('Usuário já existe no banco de dados'));
-      const result = await adminService.registerNewUser(inputMock as never);
+      const result = await userService.createUser(inputMock as never);
       expect(result.type).to.be.equal(409);
       expect(result.message).to.be.equal('Usuário já existe no banco de dados');
     });
@@ -70,9 +70,9 @@ describe('Teste de Serviço: Admin', function () {
         email: '',
       };
 
-      const adminService = new AdminService()
+      const userService = new UserService()
       Sinon.stub(Users, 'create').rejects(new Error('Erro interno do servidor'));
-      const result = await adminService.registerNewUser(inputMock as never);
+      const result = await userService.createUser(inputMock as never);
       expect(result.type).to.be.equal(500);
       expect(result.message).to.be.equal('Erro interno do servidor');
     });
@@ -80,8 +80,8 @@ describe('Teste de Serviço: Admin', function () {
     it('Teste 5: Deve retornar uma lista de usuarios', async function () {
       const findAllStub = sinon.stub(Users, 'findAll').resolves(userMock.users as any);
 
-        const adminService = new AdminService();
-        const result = await adminService.getUserAll();
+        const userService = new UserService();
+        const result = await userService.findAll();
 
         expect(findAllStub.calledOnce).to.be.true;
         expect(result).to.deep.equal(userMock.users);

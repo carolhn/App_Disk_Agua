@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import { NewUser } from "../interfaces/IUsers"
+import { NewUser } from "../../interfaces/Users/IUsers"
 
 const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const regexPassword = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
