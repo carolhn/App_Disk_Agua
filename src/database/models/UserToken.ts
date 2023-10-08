@@ -5,6 +5,7 @@ class UserToken extends Model {
   public id!: number;
   public token!: string;
   public user_id!: number;
+    created_at: any;
 }
 
 UserToken.init(
