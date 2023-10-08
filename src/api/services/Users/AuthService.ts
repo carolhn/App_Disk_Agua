@@ -1,10 +1,11 @@
-import Users from '../../database/models/Users';
-import { hashToCompare } from '../../utils/authentication/crypto';
-import { IAuth } from '../interfaces/IAuth';
-import { generateToken } from '../../utils/authentication/token';
-import { IResponse } from '../interfaces/IAuth';
+import Users from '../../../database/models/Users';
+import { hashToCompare } from '../../../utils/authentication/crypto';
+import { IAuth } from '../../interfaces/Users/IAuth';
+import { generateToken } from '../../../utils/authentication/token';
+import { IResponse } from '../../interfaces/Users/IAuth';
+import { IAuthService } from '../../interfaces/Users/IAuth';
 
-export default class AuthenticationService {
+export default class AuthenticationService implements IAuthService {
 
   async findByEmail(email: string): Promise<Users | null> {
     try {
@@ -30,6 +31,7 @@ export default class AuthenticationService {
       }
 
       const token = generateToken({ id: user.id });
+      
 
       return { user, token };
     } catch (error) {

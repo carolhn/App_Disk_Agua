@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import UserController from '../controllers/UserController';
-import { validateUserData } from '../middlewares/ValidateUser';
-import isAuthenticated from '@api/middlewares/isAuthenticated';
+import UserController from '../controllers/Users/UserController';
+import { validateUserData } from '../middlewares/Users/ValidateUser';
+import isAuthenticated from '@api/middlewares/Users/isAuthenticated';
 
 class UserRoutes {
   public router: Router = Router();

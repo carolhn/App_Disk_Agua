@@ -1,5 +1,5 @@
 import { SignOptions, sign } from 'jsonwebtoken';
-import { IToken } from '../../api/interfaces/IAuth';
+import { IToken } from '../../api/interfaces/Users/IAuth';
 import AppError from '@utils/errors/AppError';
 
 const TOKEN_SECRET = 'd3aa349c8d932ea71f11aa096ba29f61';

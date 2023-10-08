@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import AuthenticationController from '../controllers/AuthController';
-import validationAuth from '../middlewares/ValidateAuth';
+import AuthenticationController from '../controllers/Users/AuthController';
+import validationAuth from '../middlewares/Users/ValidateAuth';
 
 class AuthRoutes {
   public router: Router = Router();
