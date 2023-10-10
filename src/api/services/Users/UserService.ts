@@ -13,10 +13,7 @@ export default class UserService implements IUserService {
   };
 
   async findById(user_id: number): Promise<Users | null> {
-    const user = await Users.findByPk(user_id, {
-      attributes: { exclude: ['password'] },
-    });
-    return user;
+    return await Users.findByPk(user_id);
   }
 
   async createUser(newUser: NewUser): Promise<{ type: number; message: string }> {
