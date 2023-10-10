@@ -17,6 +17,8 @@ export interface NewUser {
 
 export interface IUserService {
   findByEmail(email: string): Promise<Users | null>;
+  findById(userId: number): Promise<Users | null>;
   createUser(newUser: NewUser): Promise<{ type: number; message: string }>;
   findAll(): Promise<IUser[]>;
+  deleteUser(ids: number): Promise<{ type: number; message: string }>;
 }
