@@ -11,7 +11,7 @@ class AuthRoutes {
   }
 
   private initializeRoutes(): void {
-    this.router.post('/',validationAuth, this.authController.authUser);
+    this.router.post('/', validationAuth, this.authController.authUser);
   }
 }
 
