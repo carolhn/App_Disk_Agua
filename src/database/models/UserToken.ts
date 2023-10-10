@@ -1,11 +1,13 @@
 import { Model, DataTypes } from 'sequelize';
 import db from './index';
+import Users from './Users';
 
 class UserToken extends Model {
-  public id!: number;
-  public token!: string;
-  public user_id!: number;
-    created_at: any;
+  id!: number;
+  token!: string;
+  userId!: number;
+  created_at!: Date;
+  updated_at!: Date;
 }
 
 UserToken.init(
@@ -17,13 +19,18 @@ UserToken.init(
       allowNull: false,
     },
     token: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.STRING, 
     },
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       unique: true,
+    },
+    created_at: {
+      type: DataTypes.DATE,
+    },
+    updated_at: {
+      type: DataTypes.DATE,
     },
   },
   {
@@ -34,5 +41,7 @@ UserToken.init(
     modelName: 'user_tokens',
   }
 );
+
+UserToken.belongsTo(Users, { foreignKey: 'user_id' });
 
 export default UserToken;

@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('user_tokens', {
@@ -10,8 +8,8 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       token: {
-        allowNull: false,
         type: Sequelize.STRING,
+        allowNull: false,
       },
       user_id: {
         type: Sequelize.INTEGER,
@@ -23,8 +21,16 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-    }, {
-      timestamps: false,
+      created_at: {
+        type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+      },
+      updated_at: {
+        type: Sequelize.DATE, // Adicione esta linha
+        allowNull: false, // Adicione esta linha
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'), // Adicione esta linha
+      },
     });
   },
 
